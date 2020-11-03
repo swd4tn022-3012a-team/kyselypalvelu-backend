@@ -17,7 +17,7 @@ public class Question {
 	
 	@ManyToOne
 	@JsonIgnore
-	@JoinColumn(name ="categoryid")
+	@JoinColumn(name ="questionnaireId")
 	private Questionnaire questionnaire;
 	
 	private String questionText;
@@ -52,7 +52,7 @@ public class Question {
 				+ questionText + "]";
 	}
 
-	public Question(Questionnaire questionnaire, String questionText) {
+	public Question(String questionText, Questionnaire questionnaire) {
 		super();	
 		this.questionnaire = questionnaire;
 		this.questionText = questionText;

@@ -1,6 +1,5 @@
 package com.example.kyselypalvelu;
 
-import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -25,15 +24,19 @@ public class KyselypalveluApplication {
 	public CommandLineRunner initialQuestionsAndQuestionnaires(QuestionRepository questions, QuestionnaireRepository questionnaires) {
 		return (args) -> {
 			log.info("insert a test question and questionnaire");
+			//Luodaan kysely, jolle annetaan parametreina otsikko ja kuvaus
+			Questionnaire questionnaire = new Questionnaire("Henkilökysely", "Tämä on henkilötietokysely");
 			
-			Question question = new Question("Toimiiko tämä?");
-			ArrayList<Question> questionList = new ArrayList<Question>();
+			//Tallennetaan kysely kantaan ja tulostetaan siitä tietoja
+			log.info("FIRST QUESTIONNAIRE ID:" + questionnaires.save(questionnaire).getQuestionnaireId().toString());
 			
-			Questionnaire questionnaire = new Questionnaire(questionList);
+			//Luodaan kaksi uutta kysymystä, jolle parametrina kysymyksen teksti  ja kysely, johon kysymys liittyy
+			Question first = new Question("Mikä on nimesi?", questionnaire);
+			Question second = new Question("Kuinka vanha olet?", questionnaire);
 			
-			questions.save(question);
-			questionnaires.save(questionnaire);
-				    
+			//Tallennetaan kysymykset kantaan
+			questions.save(first);
+			questions.save(second);
 		};
 	}
 
