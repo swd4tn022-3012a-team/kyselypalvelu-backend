@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.kyselypalvelu.domain.Answer;
+import com.example.kyselypalvelu.domain.AnswerRepository;
+
 @Controller
 public class AnswerController {
 	
@@ -23,12 +26,10 @@ public class AnswerController {
 	private AnswerRepository answerRepository;
 	
 	
-	//Metodi tallentamaan vastaus Repositoryyn
+	//Tallennetaan vastaus repositoryyn
 	@RequestMapping(value= "/answers/{questionnaireId}", method = RequestMethod.POST)
 	public String saveAnswer(@PathVariable("questionnaireId") Long questionnaireId, @RequestBody List<Answer> answers) {
-		for (Answer answer : answers) {
-			
-		}
+		return answerRepository.saveAll(answers);
 	}
 	
 	
