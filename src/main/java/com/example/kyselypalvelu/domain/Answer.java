@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Answer {
+	// attribuutit
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	// attribuutit
 	public Long answerId;
 	public String text;
 	

@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,6 +74,7 @@ public class QuestionnaireController {
 	}
 	
 	//Palauttaa id:n perusteella kyselyn json-oliona, jolla kentät questionnaireId, questions, title ja description
+	@CrossOrigin
 	@RequestMapping(value="/questionnaires/{id}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Questionnaire> findQuestionnaireRest(@PathVariable("id") Long questionnaireId) {
 		return questionnaireRepository.findById(questionnaireId);
