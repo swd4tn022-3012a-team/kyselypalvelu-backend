@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 public class QuestionnaireController {
@@ -72,6 +74,11 @@ public class QuestionnaireController {
 		questionRepository.saveAll(questions); //Tallennetaan kaikki kysymykset
 		return "redirect:questionnaires/"+saved.getQuestionnaireId();
 	}
+	// RESTful hakee kaikki kyselyt
+	@GetMapping("/questionnaires")
+	public @ResponseBody List<Questionnaire> questionnairesListRest() {
+		return (List<Questionnaire>) questionnaireRepository.findAll();
+	}
 	
 	//Palauttaa id:n perusteella kyselyn json-oliona, jolla kentät questionnaireId, questions, title ja description
 	@CrossOrigin
@@ -79,6 +86,13 @@ public class QuestionnaireController {
 	public @ResponseBody Optional<Questionnaire> findQuestionnaireRest(@PathVariable("id") Long questionnaireId) {
 		return questionnaireRepository.findById(questionnaireId);
 	}
+
+	@GetMapping("/resthome")
+	public String restHomePage() {
+		return "resthome";
+	}
+
+
 	
 }
 	
