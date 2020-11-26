@@ -54,8 +54,8 @@ public class KyselypalveluApplication {
 			questionList.add(new Question("Miten itse kehittäisit kurssia?", questionnaire, text));
 			questionList.add(new Question("Missä kurssi sinusta onnistui?", questionnaire, text));
 			questionList.add(new Question("Minkä arvosanan annat opetuksesta? (1-5)", questionnaire, radio, options));
-			questionList.add(new Question("Minkä arvosanan antaisit kurssin oppimateriaaleille? (1-5)", questionnaire, radio));
-			questionList.add(new Question("Minkä arvosanan annat kokonaisuudessaan kurssille? (1-5)", questionnaire, radio));
+			questionList.add(new Question("Minkä arvosanan antaisit kurssin oppimateriaaleille? (1-5)", questionnaire, text));
+			questionList.add(new Question("Minkä arvosanan annat kokonaisuudessaan kurssille? (1-5)", questionnaire, text));
 			
 			//Tallennetaan kysymykset kantaan
 			questions.saveAll(questionList);
