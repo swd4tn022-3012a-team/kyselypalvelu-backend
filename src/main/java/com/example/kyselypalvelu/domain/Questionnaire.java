@@ -14,12 +14,13 @@ public class Questionnaire {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long questionnaireId;
+
+	private String title;
+	private String description;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "questionnaire")
 	private List<Question> questions;
-	
-	private String title;
-	private String description;
+
 	public Long getQuestionnaireId() {
 		return questionnaireId;
 	}
