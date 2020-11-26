@@ -76,7 +76,7 @@ public class QuestionController {
 
 	// Vaihtoehdon lisäys kysymykseen
 	@RequestMapping(value = "/addquestion/{questionnaireId}", params = { "addOption" })
-	public String addQuestion(@PathVariable("questionnaireId") Long questionnaireId,
+	public String addQuestionWithOption(@PathVariable("questionnaireId") Long questionnaireId,
 			@ModelAttribute("question") Question question, Model model) {
 		Options newOptions = question.getOptions();
 
