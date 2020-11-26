@@ -1,5 +1,6 @@
 package com.example.kyselypalvelu.webcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.example.kyselypalvelu.domain.Answer;
 import com.example.kyselypalvelu.domain.AnswerRepository;
+import com.example.kyselypalvelu.domain.Question;
+import com.example.kyselypalvelu.domain.Questionnaire;
+import com.example.kyselypalvelu.domain.QuestionnaireRepository;
 
 @Controller
 public class AnswerController {
 
 	@Autowired
 	private AnswerRepository answerRepository;
+	
+	@Autowired
+	private QuestionnaireRepository questionnaireRepository;
 
 	// Metodi tallentamaan vastaus Repositoryyn
 	@CrossOrigin
@@ -37,5 +44,20 @@ public class AnswerController {
 	public @ResponseBody List<Answer> findQuestionAnswers(@PathVariable("questionId") Long questionId) {
 		return answerRepository.findByQuestionQuestionId(questionId);
 	}
+	
+	// Metodi, joka hakee fronttiin yhden kyselyn kaikki vastaukset
+	@CrossOrigin
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "/answers/{questionnaireId}", method = RequestMethod.GET)
+	public @ResponseBody List<Answer> findQuestionnaireAnswers(@PathVariable("questionnaireId") Long questionnaireId) {
+		Questionnaire questionnaire = questionnaireRepository.findById(questionnaireId).get();
+		List<Question> questions = questionnaire.getQuestions();
+		ArrayList<Answer> answers = new ArrayList<>();
+		for (Question question: questions) {
+			answers.addAll(answerRepository.findByQuestionQuestionId(question.getQuestionId()));
+		}
+		return answers;
+	}
+	
 
 }
