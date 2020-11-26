@@ -40,7 +40,7 @@ public class AnswerController {
 	// Metodi näyttämään yhden kysymyksen vastaukset
 	@CrossOrigin
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "/answers/{questionId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/answers/{questionnaireId}/{questionId}", method = RequestMethod.GET)
 	public @ResponseBody List<Answer> findQuestionAnswers(@PathVariable("questionId") Long questionId) {
 		return answerRepository.findByQuestionQuestionId(questionId);
 	}
@@ -49,13 +49,14 @@ public class AnswerController {
 	@CrossOrigin
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "/answers/{questionnaireId}", method = RequestMethod.GET)
-	public @ResponseBody List<Answer> findQuestionnaireAnswers(@PathVariable("questionnaireId") Long questionnaireId) {
+	public @ResponseBody ArrayList<Answer> findQuestionnaireAnswers(@PathVariable("questionnaireId") Long questionnaireId) {
 		Questionnaire questionnaire = questionnaireRepository.findById(questionnaireId).get();
 		List<Question> questions = questionnaire.getQuestions();
 		ArrayList<Answer> answers = new ArrayList<>();
 		for (Question question: questions) {
 			answers.addAll(answerRepository.findByQuestionQuestionId(question.getQuestionId()));
 		}
+		System.out.println("VASTAUKSIA");
 		return answers;
 	}
 	

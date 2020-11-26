@@ -6,12 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Answer {
 	// attribuutit
 	@Id
+	@JsonIgnore
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long answerId;
 	public String text;
@@ -19,7 +21,7 @@ public class Answer {
 	// relaatiot
 	@ManyToOne
 	// @JsonIgnoreProperties - vältetään tällä loputtomat loopit kahdensuuntaisten relaatioiden JSON serialisaatioissa
-	@JsonIgnoreProperties("questions")
+	@JsonIgnoreProperties({"options", "type"})
 	@JoinColumn(name = "questionId")
 	private Question question;
 	
