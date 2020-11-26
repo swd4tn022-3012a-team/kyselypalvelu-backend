@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Kyselyn tiedot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <a th:href="@{/}">Takaisin</a>
+	<div>
+		<h1 th:text="${questionnaire.title}"></h1>
+		<p th:text="${'Kuvaus: ' + questionnaire.description}" />
+		<p>Kysymykset:</p>
+		<p th:each="question: ${questionnaire.questions}" th:text="${question.questionText + ' (' + question.type.name +')'}">
+	</div>
+	<a th:href="@{/addquestion/{questionnaireId}(questionnaireId=${questionnaire.questionnaireId})}">Lisää kysymys</a>
+	<br />
+	<br />
+	<a th:href="@{/questionnaires/{questionnaireId}(questionnaireId=${questionnaire.questionnaireId})}">Näytä JSON</a>
+</body>
+</html>

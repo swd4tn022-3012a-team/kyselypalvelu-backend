@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Lisää kysymys</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<h1>Lisää kysymys</h1>
+		<p th:text="${'Kyselyyn: ' + questionnaire.title}"/>
+		<form th:object="${question}" id="questionnaireForm" th:action="@{/addquestion/{questionnaireId}(questionnaireId=${questionnaire.questionnaireId})}" action="#" method="post">
+			
+			<p>Kysymys:</p>
+			<textarea type="text" th:field="*{questionText}" />
+			
+			<p>Kysymystyyppi</p>
+			<select id="questionType" onChange="setOptionVisibility()" form="questionnaireForm" th:field="*{type}">
+				<option th:each="questionType: ${questionTypes}" th:text="${questionType.name}" th:value="${questionType.questionTypeId}"></option>
+			</select>
+			
+			<div id="options">
+			<p th:text="Vaihtoehdot" />
+		    <div th:each="option, itemStat : *{options.values}" >   	
+				<input th:field="*{options.values[__${itemStat.index}__]}" type="text"  />
+		    </div>
+		    </div>
+		    
+			<button type="submit" name="addOption" id="optionAddBtn">+ Lisää vaihtoehto</button>		
+			
+			<!-- Tallenna kysymys-painike -->
+			<input type="submit" value="Tallenna kysymys kyselyyn" />			
+		</form>		
+	</div>
+	<script>
+	
+	function setOptionVisibility() {
+	  var questionTypeSelect = document.getElementById("questionType")
+	  var selectedText = questionTypeSelect.options[questionTypeSelect.selectedIndex].text	
+		
+      if(selectedText === 'radio' || selectedText ==='checkbox') {
+	    document.getElementById("optionAddBtn").style.display = 'inherit'
+		document.getElementById("options").style.display = 'inherit'
+	  } else {
+		document.getElementById("optionAddBtn").style.display = 'none'
+		document.getElementById("options").style.display = 'none'
+	    }
+	}
+	
+	setOptionVisibility()
+	</script>
+</body>
+</html>

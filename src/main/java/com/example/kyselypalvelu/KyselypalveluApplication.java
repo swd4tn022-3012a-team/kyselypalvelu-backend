@@ -1,16 +1,19 @@
 package com.example.kyselypalvelu;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
+import com.example.kyselypalvelu.domain.Options;
+import com.example.kyselypalvelu.domain.OptionsRepository;
 import com.example.kyselypalvelu.domain.Question;
 import com.example.kyselypalvelu.domain.QuestionRepository;
+import com.example.kyselypalvelu.domain.QuestionType;
+import com.example.kyselypalvelu.domain.QuestionTypeRepository;
 import com.example.kyselypalvelu.domain.Questionnaire;
 import com.example.kyselypalvelu.domain.QuestionnaireRepository;
 
@@ -23,30 +26,39 @@ public class KyselypalveluApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner initialQuestionsAndQuestionnaires(QuestionRepository questionRepository, QuestionnaireRepository questionnaireRepository) {
+	public CommandLineRunner initialQuestionsAndQuestionnaires(QuestionRepository questions, QuestionnaireRepository questionnaires, OptionsRepository optionsRepo, QuestionTypeRepository questionTypes) {
 		return (args) -> {
 			log.info("insert a test question and questionnaire");
 			//Luodaan kysely, jolle annetaan parametreina otsikko ja kuvaus
 			Questionnaire questionnaire = new Questionnaire("HH-esimerkkikysely", "Anna palautetta opintojaksosta");
 			
+			//Luodaan kysymystyypit
+			QuestionType text = questionTypes.save(new QuestionType("text"));
+			QuestionType radio = questionTypes.save(new QuestionType("radio"));
+			QuestionType checkbox = questionTypes.save(new QuestionType("checkbox"));
+			
 			//Tallennetaan kysely kantaan ja tulostetaan siitä tietoja
-			log.info("FIRST QUESTIONNAIRE ID:" + questionnaireRepository.save(questionnaire).getQuestionnaireId().toString());
+			log.info("FIRST QUESTIONNAIRE ID:" + questionnaires.save(questionnaire).getQuestionnaireId().toString());
+			
+			//Luodaan pari esimerkkivastausvaihtoehtoa
+			Options options = optionsRepo.save(new Options(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5"))));
+			Options options1 = optionsRepo.save(new Options(new ArrayList<>(Arrays.asList("Kyllä", "Neutraali", "Ei"))));
 			
 			//Luodaan HH esimerkkikysely
-			ArrayList<Question> questions = new ArrayList<Question>();
-			questions.add(new Question("Tukivatko kurssin opiskelutavat oppimistasi?", questionnaire));
-			questions.add(new Question("Missä olisi mielestäsi parannettavaa?", questionnaire));
-			questions.add(new Question("Tunsitko saavasi apua kun sitä tarvitsit?", questionnaire));
-			questions.add(new Question("Mikä oli sinusta merkittävintä mitä opit kurssin aikana?", questionnaire));
-			questions.add(new Question("Oliko kurssi sinusta merkittävä?", questionnaire));
-			questions.add(new Question("Miten itse kehittäisit kurssia?", questionnaire));
-			questions.add(new Question("Missä kurssi sinusta onnistui?", questionnaire));
-			questions.add(new Question("Minkä arvosanan annat opetuksesta? (1-5)", questionnaire));
-			questions.add(new Question("Minkä arvosanan antaisit kurssin oppimateriaaleille? (1-5)", questionnaire));
-			questions.add(new Question("Minkä arvosanan annat kokonaisuudessaan kurssille? (1-5)", questionnaire));
+			ArrayList<Question> questionList = new ArrayList<Question>();
+			questionList.add(new Question());
+			questionList.add(new Question("Missä olisi mielestäsi parannettavaa?", questionnaire, text));
+			questionList.add(new Question("Tunsitko saavasi apua kun sitä tarvitsit?", questionnaire, text));
+			questionList.add(new Question("Mikä oli sinusta merkittävintä mitä opit kurssin aikana?", questionnaire, text));
+			questionList.add(new Question("Oliko kurssi sinusta merkittävä?", questionnaire, checkbox, options1));
+			questionList.add(new Question("Miten itse kehittäisit kurssia?", questionnaire, text));
+			questionList.add(new Question("Missä kurssi sinusta onnistui?", questionnaire, text));
+			questionList.add(new Question("Minkä arvosanan annat opetuksesta? (1-5)", questionnaire, radio, options));
+			questionList.add(new Question("Minkä arvosanan antaisit kurssin oppimateriaaleille? (1-5)", questionnaire, radio));
+			questionList.add(new Question("Minkä arvosanan annat kokonaisuudessaan kurssille? (1-5)", questionnaire, radio));
 			
 			//Tallennetaan kysymykset kantaan
-			questionRepository.saveAll(questions);
+			questions.saveAll(questionList);
 		};
 	}
 

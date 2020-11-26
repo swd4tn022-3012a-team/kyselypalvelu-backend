@@ -1,11 +1,13 @@
 package com.example.kyselypalvelu.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,6 +23,37 @@ public class Question {
 	private Questionnaire questionnaire;
 	
 	private String questionText;
+	
+	@OneToOne
+	private Options options;
+	
+	@ManyToOne
+	@JoinColumn(name="questionTypeId")
+	private QuestionType type;
+
+	public QuestionType getType() {
+		return type;
+	}
+
+	public Question(String questionText, Questionnaire questionnaire, QuestionType type ) {
+		super();
+		this.questionnaire = questionnaire;
+		this.questionText = questionText;
+		this.type = type;
+		this.options = null;
+	}
+
+	public Question(String questionText, Questionnaire questionnaire, QuestionType type, Options answerOptions) {
+		super();
+		this.questionnaire = questionnaire;
+		this.questionText = questionText;
+		this.options = answerOptions;
+		this.type = type;
+	}
+
+	public void setType(QuestionType type) {
+		this.type = type;
+	}
 
 	public Long getQuestionId() {
 		return questionId;
@@ -36,6 +69,14 @@ public class Question {
 
 	public void setQuestionnaire(Questionnaire questionnaire) {
 		this.questionnaire = questionnaire;
+	}
+
+	public Options getOptions() {
+		return options;
+	}
+
+	public void setOptions(Options answerOptions) {
+		this.options = answerOptions;
 	}
 
 	public String getQuestionText() {
