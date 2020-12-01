@@ -29,16 +29,18 @@ public class KyselypalveluApplication {
 	public CommandLineRunner initialQuestionsAndQuestionnaires(QuestionRepository questions, QuestionnaireRepository questionnaires, OptionsRepository optionsRepo, QuestionTypeRepository questionTypes) {
 		return (args) -> {
 			log.info("insert a test question and questionnaire");
-			//Luodaan kysely, jolle annetaan parametreina otsikko ja kuvaus
+			//Luodaan kyselyt, joille annetaan parametreina otsikko ja kuvaus
 			Questionnaire questionnaire = new Questionnaire("HH-esimerkkikysely", "Anna palautetta opintojaksosta");
+			Questionnaire questionnaire2 = new Questionnaire("Kyselylomakkeen arviointi", "Anna palautetta kyselylomakkeesta");
 			
 			//Luodaan kysymystyypit
 			QuestionType text = questionTypes.save(new QuestionType("text"));
 			QuestionType radio = questionTypes.save(new QuestionType("radio"));
 			QuestionType checkbox = questionTypes.save(new QuestionType("checkbox"));
 			
-			//Tallennetaan kysely kantaan ja tulostetaan siitä tietoja
+			//Tallennetaan kyselyt kantaan ja tulostetaan niistä tietoja
 			log.info("FIRST QUESTIONNAIRE ID:" + questionnaires.save(questionnaire).getQuestionnaireId().toString());
+			log.info("SECOND QUESTIONNAIRE ID:" + questionnaires.save(questionnaire2).getQuestionnaireId().toString());
 			
 			//Luodaan pari esimerkkivastausvaihtoehtoa
 			Options options = optionsRepo.save(new Options(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5"))));
@@ -57,8 +59,18 @@ public class KyselypalveluApplication {
 			questionList.add(new Question("Minkä arvosanan antaisit kurssin oppimateriaaleille? (1-5)", questionnaire, text));
 			questionList.add(new Question("Minkä arvosanan annat kokonaisuudessaan kurssille? (1-5)", questionnaire, text));
 			
+			//Luodaan Kyselypalvelun arviointi-kysely
+			ArrayList<Question> questionList2 = new ArrayList<Question>();
+			questionList2.add(new Question());
+			questionList2.add(new Question("Onko kysymysten luonti mielestäsi helppoa?", questionnaire2, text));
+			questionList2.add(new Question("Mitä mieltä olet kyselylomakkeen visuaalisesta ilmeestä?", questionnaire2, text));
+			questionList2.add(new Question("Miten kehittäisit kyselylomaketta?", questionnaire2, text));
+			questionList2.add(new Question("Vastaako kyselylomake tarpeitasi?", questionnaire2, checkbox, options1));
+			questionList2.add(new Question("Minkä arvosanan antaisit kyselylomakkeelle? (1-5)", questionnaire2, radio, options));
+					
 			//Tallennetaan kysymykset kantaan
 			questions.saveAll(questionList);
+			questions.saveAll(questionList2);
 		};
 	}
 
