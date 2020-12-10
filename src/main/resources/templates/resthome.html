@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>REST Home Page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>REST Home Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>REST Home Page</h1>
-<h2>All Questionnaires</h2>
-<p>
-    <strong>Method:</strong> GET <strong>Endpoint:</strong> <strong><a
-        href="/questionnaires">/questionnaires</a></strong>
-</p>
-<p>
-    <strong>JSON Example:</strong>
-</p>
-<pre><code>[
+	<h1>REST Home Page</h1>
+	<h2>All Questionnaires</h2>
+	<p>
+		<strong>Method:</strong> GET <strong>Endpoint:</strong> <strong><a
+			href="/questionnaires">/questionnaires</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre>
+		<code>[
    {
       "questionnaireId":4,
       "title":"HH-esimerkkikysely",
@@ -61,16 +62,20 @@
          }
       ]
    }
-]</code></pre>
-<h2>Questionnaire by Id</h2>
-<p>
-    <strong>Method:</strong> GET <strong>Endpoint: questionnaires/{id}</strong> <strong><a
-        href="/questionnaires/4">/questionnaires/4</a></strong>
-</p>
-<p>
-    <strong>JSON Example:</strong>
-</p>
-<pre><code>
+]</code>
+	</pre>
+	
+	
+	<h2>Questionnaire by Id</h2>
+	<p>
+		<strong>Method:</strong> GET <strong>Endpoint:
+			questionnaires/{id}</strong> <strong><a href="/questionnaires/4">/questionnaires/4</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre>
+		<code>
    {
    "questionnaireId":4,
    "title":"HH-esimerkkikysely",
@@ -79,22 +84,6 @@
       {
          "questionId":8,
          "questionText":"Missä olisi mielestäsi parannettavaa?",
-         "options":null,
-         "type":{
-            "name":"text"
-         }
-      },
-      {
-         "questionId":9,
-         "questionText":"Tunsitko saavasi apua kun sitä tarvitsit?",
-         "options":null,
-         "type":{
-            "name":"text"
-         }
-      },
-      {
-         "questionId":10,
-         "questionText":"Mikä oli sinusta merkittävintä mitä opit kurssin aikana?",
          "options":null,
          "type":{
             "name":"text"
@@ -115,22 +104,6 @@
          }
       },
       {
-         "questionId":12,
-         "questionText":"Miten itse kehittäisit kurssia?",
-         "options":null,
-         "type":{
-            "name":"text"
-         }
-      },
-      {
-         "questionId":13,
-         "questionText":"Missä kurssi sinusta onnistui?",
-         "options":null,
-         "type":{
-            "name":"text"
-         }
-      },
-      {
          "questionId":14,
          "questionText":"Minkä arvosanan annat opetuksesta? (1-5)",
          "options":{
@@ -145,55 +118,23 @@
          "type":{
             "name":"radio"
          }
-      },
-      {
-         "questionId":15,
-         "questionText":"Minkä arvosanan antaisit kurssin oppimateriaaleille? (1-5)",
-         "options":null,
-         "type":{
-            "name":"text"
-         }
-      },
-      {
-         "questionId":16,
-         "questionText":"Minkä arvosanan annat kokonaisuudessaan kurssille? (1-5)",
-         "options":null,
-         "type":{
-            "name":"text"
-         }
       }
    ]
 }
-</code></pre>
-<h2>Answer by questionnaireId and questionId</h2>
-
-<p>
-    <strong>Method:</strong> GET <strong>Endpoint: /answers/{questionnaireId}/{questionId}</strong> <strong><a
-        href="/answers/4/9">/answers/4/9</a></strong>
-</p>
-<p>
-    <strong>JSON Example:</strong>
-</p>
-<pre>[
-   {​​​​​​
-      "text":"Kaikessa",
-      "question":{​​​​​​
-         "questionId":9,
-         "questionText":"Missä olisi mielestäsi parannettavaa?"
-      }​​​​​​
-   }​​​​​​
-]<code>
-  
-</code></pre>
-<h2>All answers by questionnaireId</h2>
-<p>
-    <strong>Method:</strong> GET <strong>Endpoint: /answers/{questionnaireId}</strong> <strong><a
-        href="/answers/5">/answers/5</a></strong>
-</p>
-<p>
-    <strong>JSON Example:</strong>
-</p>
-<pre><code>
+</code>
+	</pre>
+	
+	
+	<h2>All answers by questionnaireId</h2>
+	<p>
+		<strong>Method:</strong> GET <strong>Endpoint:
+			/answers/{questionnaireId}</strong> <strong><a href="/answers/5">/answers/5</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre>
+		<code>
   [
    {​​​​
       "text":"On",
@@ -215,29 +156,43 @@
          "questionId":21,
          "questionText":"Miten kehittäisit kyselylomaketta?"
       }​​​​
-   }​​​​,
-   {​​​​
-      "text":"Kyllä",
-      "question":{​​​​
-         "questionId":22,
-         "questionText":"Vastaako kyselylomake tarpeitasi?"
-      }​​​​
-   }​​​​,
-   {​​​​
-      "text":"4",
-      "question":{​​​​
-         "questionId":23,
-         "questionText":"Minkä arvosanan antaisit kyselylomakkeelle? (1-5)"
-      }​​​​
    }​​​​
+​​​​
+​​​​
 ]
-</code></pre>
-<h2>New answer</h2>
-<p>
-    <strong>Method:</strong> POST <strong>Endpoint: /answers/{questionnaireId}</strong> <strong><a
-        href="/answers/5">/answers/5</a></strong>
-</p>
-<pre><code>
+</code>
+	</pre>
+	<h2>Answer by questionnaireId and questionId</h2>
+
+	<p>
+		<strong>Method:</strong> GET <strong>Endpoint:
+			/answers/{questionnaireId}/{questionId}</strong> <strong><a
+			href="/answers/4/9">/answers/4/9</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre><code>
+  [
+   {​​​​​​
+      "text":"Kaikessa",
+      "question":{​​​​​​
+         "questionId":9,
+         "questionText":"Missä olisi mielestäsi parannettavaa?"
+      }​​​​​​
+   }​​​​​​
+]
+</code>
+	</pre>
+
+
+	<h2>New answer</h2>
+	<p>
+		<strong>Method:</strong> POST <strong>Endpoint:
+			/answers/{questionnaireId}</strong> <strong><a href="/answers/5">/answers/5</a></strong>
+	</p>
+	<pre>
+		<code>
    [
     {
         "text": "Erittäin miellyttävä",
@@ -246,5 +201,6 @@
         }
     }
 ]
-</code></pre>
+</code>
+	</pre>
 </body>
