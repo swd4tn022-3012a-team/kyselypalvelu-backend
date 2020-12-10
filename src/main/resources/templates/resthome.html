@@ -13,42 +13,55 @@
 <body>
 	<h1>REST Home Page</h1>
 	<!-- Table here -->
-	<table class="table">
+	<h2>Actions of resources</h2>
+	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th scope="col">*</th>
-				<th scope="col">*</th>
-				<th scope="col">*</th>
-				<th scope="col">*</th>
-				<th scope="col">*</th>
+				<th scope="col">Http Method</th>
+				<th scope="col">Resource EndPoint</th>
+				<th scope="col">Description</th>
+				<th scope="col">JSON</th>
+
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<th scope="row">1</th>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
+				<td>GET</td>
+				<td>/questionnaires</td>
+				<td>Gets all questionnaires</td>
+				<td><a href="/questionnaires">/questionnaires</a></td>
 			</tr>
 
 			<tr>
-				<th scope="row">2</th>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
+
+				<td>GET</td>
+				<td>/questionnaires/id</td>
+				<td>Gets questionnaire by id</td>
+				<td><a href="/questionnaires/4">/questionnaires/4</a></td>
+				
 			</tr>
 
 			<tr>
-				<th scope="row">3</th>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
-				<td>*</td>
+
+				<td>GET</td>
+				<td>/answers/questionnaireId</td>
+				<td>Gets all answers by questionnaire id (text, checkbox or radio)</td>
+				<td><a href="/answers/4">/answers/4</a></td>
+			</tr>
+			<tr>
+
+				<td>GET</td>
+				<td>/answers/questionnaireId/questionId</td>
+				<td>Gets all answers by questionnaire id and question id (text, checkbox or radio)</td>
+				<td><a href="/answers/4/9">/answers/4/9</a></td>
+			</tr>
+
+			<tr>
+
+				<td>POST</td>
+				<td>/answers/questionnaireId</td>
+				<td>Adds new answer</td>
+				<td></td>
 			</tr>
 		</tbody>
 	</table>
