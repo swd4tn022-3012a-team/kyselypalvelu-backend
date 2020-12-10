@@ -1,52 +1,63 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{fragments/main_layout}">
 <head>
 <title>Lisää kysymys</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
+	<div layout:fragment="content" class="container">
 		<h1>Lisää kysymys</h1>
-		<p th:text="${'Kyselyyn: ' + questionnaire.title}"/>
-		<form th:object="${question}" id="questionnaireForm" th:action="@{/addquestion/{questionnaireId}(questionnaireId=${questionnaire.questionnaireId})}" action="#" method="post">
-			
-			<p>Kysymys:</p>
-			<textarea type="text" th:field="*{questionText}" rows="3" cols="50" />
-			
-			<p>Kysymystyyppi</p>
-			<select id="questionType" onChange="setOptionVisibility()" form="questionnaireForm" th:field="*{type}">
-				<option th:each="questionType: ${questionTypes}" th:text="${questionType.name}" th:value="${questionType.questionTypeId}"></option>
-			</select>
-			
-			<div id="options">
-			<p th:text="Vaihtoehdot" />
-		    <div th:each="option, itemStat : *{options.values}" >   	
-				<input th:field="*{options.values[__${itemStat.index}__]}" type="text" size="40"  />
-		    </div>
-		    </div>
-		    
-			<button type="submit" name="addOption" id="optionAddBtn">+ Lisää vaihtoehto</button>		
-			
-			<!-- Tallenna kysymys-painike -->
-			<input type="submit" value="Tallenna kysymys kyselyyn" />			
-		</form>		
+		<div class="col-md-4">
+			<p th:text="${'Kyselyyn: ' + questionnaire.title}" />
+			<form th:object="${question}" id="questionnaireForm"
+				th:action="@{/addquestion/{questionnaireId}(questionnaireId=${questionnaire.questionnaireId})}"
+				action="#" method="post">
+
+				<p>Kysymys:</p>
+				<textarea type="text" th:field="*{questionText}"
+					class="form-control" rows="3" cols="50" />
+
+				<p>Kysymystyyppi</p>
+				<select id="questionType" onChange="setOptionVisibility()" class="form-control"
+					form="questionnaireForm" th:field="*{type}">
+					<option th:each="questionType: ${questionTypes}"
+						th:text="${questionType.name}"
+						th:value="${questionType.questionTypeId}"></option>
+				</select>
+
+				<div id="options">
+					<p th:text="Vaihtoehdot" />
+					<div th:each="option, itemStat : *{options.values}">
+						<input th:field="*{options.values[__${itemStat.index}__]}"
+							type="text" size="40" class="form-control"/>
+					</div>
+				</div>
+				<br/>
+				<button type="submit" name="addOption" id="optionAddBtn" class="btn btn-primary">+
+					Lisää vaihtoehto</button>
+
+				<!-- Tallenna kysymys-painike -->
+				<input type="submit" value="Tallenna kysymys kyselyyn" class="btn btn-success"/>
+			</form>
+		</div>
 	</div>
 	<script>
-	
-	function setOptionVisibility() {
-	  var questionTypeSelect = document.getElementById("questionType")
-	  var selectedText = questionTypeSelect.options[questionTypeSelect.selectedIndex].text	
-		
-      if(selectedText === 'radio' || selectedText ==='checkbox') {
-	    document.getElementById("optionAddBtn").style.display = 'inherit'
-		document.getElementById("options").style.display = 'inherit'
-	  } else {
-		document.getElementById("optionAddBtn").style.display = 'none'
-		document.getElementById("options").style.display = 'none'
-	    }
-	}
-	
-	setOptionVisibility()
+		function setOptionVisibility() {
+			var questionTypeSelect = document.getElementById("questionType")
+			var selectedText = questionTypeSelect.options[questionTypeSelect.selectedIndex].text
+
+			if (selectedText === 'radio' || selectedText === 'checkbox') {
+				document.getElementById("optionAddBtn").style.display = 'inherit'
+				document.getElementById("options").style.display = 'inherit'
+			} else {
+				document.getElementById("optionAddBtn").style.display = 'none'
+				document.getElementById("options").style.display = 'none'
+			}
+		}
+
+		setOptionVisibility()
 	</script>
 </body>
 </html>

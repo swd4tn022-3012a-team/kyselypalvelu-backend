@@ -26,14 +26,14 @@ public class QuestionnaireController {
 	@Autowired
 	private QuestionnaireRepository questionnaireRepository;
 	
-	/*
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/questionnairelist", method = RequestMethod.GET)
 	public String listQuestionnaires(Model model) {	
 		//Haetaan kyselyt tietokannasta
 		List<Questionnaire> questionnaires = (List<Questionnaire>) questionnaireRepository.findAll();	
 		model.addAttribute("questionnaires", questionnaires);	
-		return "resthome";
-	}*/
+		return "questionnairelist";
+	}
 	@RequestMapping(value = "/")
 	public String home() {
 		return "resthome";
@@ -45,6 +45,12 @@ public class QuestionnaireController {
 		return "json";
 	
 	}
+	@RequestMapping(value = "/questionnairelist")
+	public String questionnairelist() {
+		return "questionnairelist";
+	
+	}
+	
 	
 	
 	// Kyselyn luonti
