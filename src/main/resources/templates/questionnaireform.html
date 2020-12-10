@@ -6,21 +6,25 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
-	<div>
+	<div class="container">
 		<h1>Luo uusi kysely</h1>
+		<div class="col-md-4">
 		<form th:object="${questionnaire}" id="questionnaireForm" th:action="@{/newquestionnaire}" action="#" method="post">
 			<!-- Kyselyn otsikon input-kenttä -->
 			<label for="title">Kyselyn Otsikko</label>
 			<br /> 	
-			<input id="title" type="text" th:field="*{title}" size="50"/>
+			<input id="title" type="text" class="form-control" th:field="*{title}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
 			<br />
 			<!-- Kyselyn kuvauksen input-kenttä -->
 			<label for="description">Kyselyn kuvaus</label>
 			<br />	
-			<textarea id="description" type="text" th:field="*{description}" rows="3" cols="50" />
+			<textarea id="description" type="text" th:field="*{description}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
 			<br />
-			<input type="submit" value="Tallenna" />			
+			<input type="submit" class="btn btn-success" value="Tallenna" />			
 		</form>		
+		</div>
 	</div>
 </body>
 </html>
