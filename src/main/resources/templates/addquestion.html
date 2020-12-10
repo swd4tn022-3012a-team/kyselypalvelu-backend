@@ -11,7 +11,7 @@
 		<form th:object="${question}" id="questionnaireForm" th:action="@{/addquestion/{questionnaireId}(questionnaireId=${questionnaire.questionnaireId})}" action="#" method="post">
 			
 			<p>Kysymys:</p>
-			<textarea type="text" th:field="*{questionText}" />
+			<textarea type="text" th:field="*{questionText}" rows="3" cols="50" />
 			
 			<p>Kysymystyyppi</p>
 			<select id="questionType" onChange="setOptionVisibility()" form="questionnaireForm" th:field="*{type}">
@@ -21,7 +21,7 @@
 			<div id="options">
 			<p th:text="Vaihtoehdot" />
 		    <div th:each="option, itemStat : *{options.values}" >   	
-				<input th:field="*{options.values[__${itemStat.index}__]}" type="text"  />
+				<input th:field="*{options.values[__${itemStat.index}__]}" type="text" size="40"  />
 		    </div>
 		    </div>
 		    

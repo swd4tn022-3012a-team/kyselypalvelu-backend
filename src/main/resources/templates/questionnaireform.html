@@ -11,12 +11,12 @@
 			<!-- Kyselyn otsikon input-kenttä -->
 			<label for="title">Kyselyn Otsikko</label>
 			<br /> 	
-			<input id="title" type="text" th:field="*{title}" />
+			<input id="title" type="text" th:field="*{title}" size="50"/>
 			<br />
 			<!-- Kyselyn kuvauksen input-kenttä -->
 			<label for="description">Kyselyn kuvaus</label>
 			<br />	
-			<textarea id="description" type="text" th:field="*{description}" />
+			<textarea id="description" type="text" th:field="*{description}" rows="3" cols="50" />
 			<br />
 			<input type="submit" value="Tallenna" />			
 		</form>		
