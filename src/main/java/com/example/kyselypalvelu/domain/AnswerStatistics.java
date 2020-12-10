@@ -2,13 +2,13 @@ package com.example.kyselypalvelu.domain;
 
 public class AnswerStatistics {
 	private String text;
-	private int count;
+	private long count;
 	
 	public AnswerStatistics() {
 		super();
 	}
 	
-	public AnswerStatistics(String text, int count) {
+	public AnswerStatistics(String text, long count) {
 		super();
 		this.text = text;
 		this.count = count;
@@ -22,11 +22,11 @@ public class AnswerStatistics {
 		this.text = text;
 	}
 	
-	public int getCount() {
+	public long getCount() {
 		return count;
 	}
 	
-	public void setCount(int count) {
+	public void setCount(long count) {
 		this.count = count;
 	}
 	

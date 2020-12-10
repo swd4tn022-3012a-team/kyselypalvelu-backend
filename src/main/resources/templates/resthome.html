@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <title>REST Home Page</title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
 </head>
 <body>
 	<h1>REST Home Page</h1>
-	
-	
-	
-	
-	
+	<!-- Table here -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">*</th>
+				<th scope="col">*</th>
+				<th scope="col">*</th>
+				<th scope="col">*</th>
+				<th scope="col">*</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">1</th>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+			</tr>
+
+			<tr>
+				<th scope="row">2</th>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+			</tr>
+
+			<tr>
+				<th scope="row">3</th>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+				<td>*</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+
 	<h2>All Questionnaires</h2>
 	<p>
 		<strong>Method:</strong> GET <strong>Endpoint:</strong> <strong><a
@@ -69,8 +114,8 @@
    }
 ]</code>
 	</pre>
-	
-	
+
+
 	<h2>Questionnaire by Id</h2>
 	<p>
 		<strong>Method:</strong> GET <strong>Endpoint:
@@ -128,8 +173,8 @@
 }
 </code>
 	</pre>
-	
-	
+
+
 	<h2>All answers by questionnaireId</h2>
 	<p>
 		<strong>Method:</strong> GET <strong>Endpoint:
@@ -177,7 +222,8 @@
 	<p>
 		<strong>JSON Example:</strong>
 	</p>
-	<pre><code>
+	<pre>
+		<code>
   [
    {​​​​​​
       "text":"Kaikessa",
